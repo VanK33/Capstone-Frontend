@@ -3,7 +3,10 @@ import Registration from "../../components/Registration/Registration";
 
 function AuthPage(props) {
   return (
-    <div>{props.className === "auth-page" ? <Registration /> : <LogIn />}</div>
+    <div>
+      <div>{/* Here is going to be a large logo */}</div>
+      {props.page === "registration" ? <Registration /> : <LogIn />}
+    </div>
   );
 }
 

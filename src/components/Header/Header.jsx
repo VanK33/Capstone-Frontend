@@ -10,22 +10,24 @@ function Header(props) {
       <Link to={<PublicPage />}>{/*这里是Logo */}</Link>
 
       <div>
-        {props.token && <Button> Post </Button>}
-        <Button onClick={props.handleRandomRecipe}> Try My Luck </Button>
         <div>
-          {!props.token ? (
-            <Button> Personal Profile </Button>
-          ) : (
-            <div>
-              <Link to={<AuthPage className={`login-page`} />}>
-                <Button>LogIn</Button>
-              </Link>
-              <Link to={<AuthPage className={`auth-page`} />}>
-                <Button>Register</Button>
-              </Link>
-            </div>
-          )}
-
+          {props.token && <Button> Post </Button>}{" "}
+          {/* 这里或许需要改成ternary op,然后:的地方创建一个transparent placeholder */}
+          <Button onClick={props.handleRandomRecipe}> Try My Luck </Button>
+          <div>
+            {!props.token ? (
+              <Button> Personal Profile </Button>
+            ) : (
+              <div>
+                <Link to={<AuthPage page={`login`} />}>
+                  <Button>LogIn</Button>
+                </Link>
+                <Link to={<AuthPage page={`registration`} />}>
+                  <Button>Register</Button>
+                </Link>
+              </div>
+            )}
+          </div>
           <div>
             <a
               href="www.linkedin.com/in/jeff-yifei-ma"
