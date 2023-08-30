@@ -1,4 +1,21 @@
+import { useEffect, useState } from "react";
+
 function SelectionCard(props) {
+  const [recipeArray, setRecipeArray] = useState();
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("mockinglink");
+      console.log(response.data);
+      setRecipeArray(response.data);
+    } catch (error) {
+      console.log("fetching data error: ", error);
+    }
+  };
   return (
     <div>
       <div>
