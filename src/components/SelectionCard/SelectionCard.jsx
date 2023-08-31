@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
+
+const URL = process.env.REACT_APP_BASE_URL;
 
 function SelectionCard(props) {
   const [recipeArray, setRecipeArray] = useState();
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("mockinglink");
+      const response = await axios.get(`${URL}`);
       console.log(response.data);
-      setRecipeArray(response.data);
+      // setRecipeArray(response.data);
     } catch (error) {
       console.log("fetching data error: ", error);
     }

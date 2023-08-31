@@ -1,5 +1,6 @@
 import LogIn from "../../components/LogIn/LogIn";
 import Registration from "../../components/Registration/Registration";
+import { useState, useEffect } from "react";
 
 function AuthPage(props) {
   return (
