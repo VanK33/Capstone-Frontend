@@ -13,6 +13,10 @@ function SelectionCard(props) {
   const [meatType, setMeatType] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [isDataReady, setIsDataReady] = useState(false);
+  const [selectedOrigin, setSelectedOrigin] = useState(null);
+  const [selectedTaste, setSelectedTaste] = useState(null);
+  const [selectedMeatType, setSelectedMeatType] = useState(null);
+  const [selectedIngredients, setSelectedIngredients] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -75,6 +79,38 @@ function SelectionCard(props) {
     }
   }, [recipeArray]);
 
+  const filterRecipes = () => {
+    let filteredRecipes = [...recipeArray];
+
+    if (selectedOrigin) {
+      filteredRecipes = filteredRecipes.filter((recipe) =>
+        recipe.origins.includes(selectedOrigin)
+      );
+    }
+
+    if (selectedTaste) {
+      filteredRecipes = filteredRecipes.filter((recipe) =>
+        recipe.tastes.includes(selectedTaste)
+      );
+    }
+
+    if (selectedMeatType) {
+      filteredRecipes = filteredRecipes.filter((recipe) =>
+        recipe.meat.includes(selectedMeatType)
+      );
+    }
+
+    if (selectedIngredients.length > 0) {
+      filteredRecipes = filteredRecipes.filter((recipe) =>
+        selectedIngredients.every((ingredient) =>
+          recipe.ingredients.includes(ingredient)
+        )
+      );
+    }
+
+    return filterRecipes;
+  };
+
   return (
     <div>
       {isDataReady && (
@@ -82,30 +118,72 @@ function SelectionCard(props) {
           <div>
             <h3> Origin </h3>
             {origins.map((origin) => (
-              <Button key={origin}> {origin} </Button>
+              <Button
+                key={origin}
+                onClick={() => setSelectedOrigin(origin)}
+                variant={selectedOrigin === origin ? "contained" : "outlined"}
+              >
+                {origin}
+              </Button>
             ))}
           </div>
           <div>
             <h3> Taste </h3>
             {tastes.map((taste) => (
-              <Button key={taste}> {taste} </Button>
+              <Button
+                key={taste}
+                onClick={() => setSelectedTaste(taste)}
+                variant={selectedTaste === taste ? "contained" : "outlined"}
+              >
+                {taste}
+              </Button>
             ))}
           </div>
           <div>
             <h3> Meat-type </h3>
             {meatType.map((meat) => (
-              <Button key={meat}> {meat} </Button>
+              <Button
+                key={meat}
+                onClick={() => setSelectedMeatType(meat)}
+                variant={selectedMeatType === meat ? "contained" : "outlined"}
+              >
+                {meat}
+              </Button>
             ))}
           </div>
           <div>
             <h3> Ingredients </h3>
             {ingredients.map((ingredient) => (
-              <Button key={ingredient}> {ingredient} </Button>
+              <Button
+                key={ingredient}
+                onClick={() => {
+                  if (selectedIngredients.includes(ingredient)) {
+                    setSelectedIngredients((prev) =>
+                      prev.filter((item) => item !== ingredient)
+                    );
+                  } else {
+                    setSelectedIngredients((prev) => [...prev, ingredient]);
+                  }
+                }}
+                variant={
+                  selectedIngredients.includes(ingredient)
+                    ? "contained"
+                    : "outlined"
+                }
+              >
+                {" "}
+                {ingredient}{" "}
+              </Button>
             ))}
           </div>
           <div>
             <h3> Results </h3>
-            {/* Render search results */}
+            {filterRecipes().map((recipe, index) => (
+              <div key={index}>
+                <h4>{recipe.title}</h4>
+                <p>Origin: {recipe.origin}</p>
+              </div>
+            ))}
           </div>
         </>
       )}
