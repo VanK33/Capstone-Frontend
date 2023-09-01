@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
+import Modal from "../Modal/Modal";
 
 const URL = process.env.REACT_APP_BASE_URL;
 const PORT = process.env.REACT_APP_PORT;
@@ -17,6 +18,18 @@ function SelectionCard(props) {
   const [selectedTaste, setSelectedTaste] = useState(null);
   const [selectedMeatType, setSelectedMeatType] = useState(null);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedRecipe, setSelectedRecipe] = useState();
+
+  const openModal = (recipe) => {
+    setSelectedRecipe(recipe);
+    setIsModalOpen(true);
+  };
+  const closeModal = (event) => {
+    if (event.target.getAttribute("class") === "modal-overlay") {
+      setIsModalOpen(false);
+    }
+  };
 
   const fetchData = async () => {
     try {
@@ -79,38 +92,6 @@ function SelectionCard(props) {
     }
   }, [recipeArray]);
 
-  const filterRecipes = () => {
-    let filteredRecipes = [...recipeArray];
-
-    if (selectedOrigin) {
-      filteredRecipes = filteredRecipes.filter((recipe) =>
-        recipe.origins.includes(selectedOrigin)
-      );
-    }
-
-    if (selectedTaste) {
-      filteredRecipes = filteredRecipes.filter((recipe) =>
-        recipe.tastes.includes(selectedTaste)
-      );
-    }
-
-    if (selectedMeatType) {
-      filteredRecipes = filteredRecipes.filter((recipe) =>
-        recipe.meat.includes(selectedMeatType)
-      );
-    }
-
-    if (selectedIngredients.length > 0) {
-      filteredRecipes = filteredRecipes.filter((recipe) =>
-        selectedIngredients.every((ingredient) =>
-          recipe.ingredients.includes(ingredient)
-        )
-      );
-    }
-
-    return filterRecipes;
-  };
-
   return (
     <div>
       {isDataReady && (
@@ -119,8 +100,14 @@ function SelectionCard(props) {
             <h3> Origin </h3>
             {origins.map((origin) => (
               <Button
-                key={origin}
-                onClick={() => setSelectedOrigin(origin)}
+                key={origin.id}
+                onClick={() => {
+                  if (selectedOrigin === origin) {
+                    setSelectedOrigin(null);
+                  } else {
+                    setSelectedOrigin(origin);
+                  }
+                }}
                 variant={selectedOrigin === origin ? "contained" : "outlined"}
               >
                 {origin}
@@ -131,8 +118,14 @@ function SelectionCard(props) {
             <h3> Taste </h3>
             {tastes.map((taste) => (
               <Button
-                key={taste}
-                onClick={() => setSelectedTaste(taste)}
+                key={taste.id}
+                onClick={() => {
+                  if (selectedTaste === taste) {
+                    setSelectedTaste(null);
+                  } else {
+                    setSelectedTaste(taste);
+                  }
+                }}
                 variant={selectedTaste === taste ? "contained" : "outlined"}
               >
                 {taste}
@@ -143,8 +136,14 @@ function SelectionCard(props) {
             <h3> Meat-type </h3>
             {meatType.map((meat) => (
               <Button
-                key={meat}
-                onClick={() => setSelectedMeatType(meat)}
+                key={meat.id}
+                onClick={() => {
+                  if (selectedMeatType === meat) {
+                    setSelectedMeatType(null);
+                  } else {
+                    setSelectedMeatType(meat);
+                  }
+                }}
                 variant={selectedMeatType === meat ? "contained" : "outlined"}
               >
                 {meat}
@@ -155,7 +154,7 @@ function SelectionCard(props) {
             <h3> Ingredients </h3>
             {ingredients.map((ingredient) => (
               <Button
-                key={ingredient}
+                key={ingredient.id}
                 onClick={() => {
                   if (selectedIngredients.includes(ingredient)) {
                     setSelectedIngredients((prev) =>
@@ -178,14 +177,35 @@ function SelectionCard(props) {
           </div>
           <div>
             <h3> Results </h3>
-            {filterRecipes().map((recipe, index) => (
-              <div key={index}>
-                <h4>{recipe.title}</h4>
-                <p>Origin: {recipe.origin}</p>
-              </div>
-            ))}
+            {recipeArray
+              .filter(
+                (recipe) =>
+                  (!selectedOrigin ||
+                    recipe.origins.includes(selectedOrigin)) &&
+                  (!selectedTaste || recipe.tastes.includes(selectedTaste)) &&
+                  (!selectedMeatType ||
+                    recipe.meat.includes(selectedMeatType)) &&
+                  (selectedIngredients.length === 0 ||
+                    selectedIngredients.every((ingredient) =>
+                      recipe.ingredients.includes(ingredient)
+                    ))
+              )
+              .map((recipe) => (
+                <Button
+                  key={recipe.id}
+                  onClick={() => {
+                    openModal(recipe);
+                  }}
+                >
+                  {recipe.recipe_name}
+                </Button>
+              ))}
           </div>
         </>
+      )}
+
+      {isModalOpen && (
+        <Modal closeModal={closeModal} selectedRecipe={selectedRecipe} />
       )}
     </div>
   );
