@@ -1,31 +1,25 @@
 import { Button } from "@mui/material";
 import "./Header.scss";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 
-function Header(props) {
-  const [token, setToken] = useState(false);
-
-  useEffect(() => {
-    let tokenStorage = localStorage.getItem("token");
-    if (tokenStorage) {
-      setToken(true);
-    }
-  }, []);
+function Header({ currentUser, handleRandomRecipe }) {
+  console.log("Header CurrentUser", currentUser);
 
   return (
     <div>
       <div>
         <div>
-          {props.token ? (
+          {currentUser ? (
             <Button> Post </Button>
           ) : (
             <Button> placeholder </Button>
           )}
-          <Button onClick={props.handleRandomRecipe}> Try My Luck </Button>
+          <Button onClick={handleRandomRecipe}> Try My Luck </Button>
           <div>
-            {props.token ? (
-              <Button> Personal Profile </Button>
+            {currentUser ? (
+              <Link to={`/auth/${currentUser.id}/profile`}>
+                <Button> Personal Profile </Button>
+              </Link>
             ) : (
               <div>
                 <Link to={"/auth/login"}>
@@ -38,7 +32,7 @@ function Header(props) {
             )}
           </div>
           <div>
-            <a href="www.linkedin.com/in/jeff-yifei-ma">
+            <a href="https://www.linkedin.com/in/jeff-yifei-ma">
               <img src="" alt="linked in icon" />
             </a>
             <a href="https://github.com/VanK33">

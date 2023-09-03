@@ -1,10 +1,14 @@
 import Header from "../../components/Header/Header";
 import SelectionCard from "../../components/SelectionCard/SelectionCard";
 
-function PublicPage({ token }) {
+function PublicPage({ token, currentUser, handleRandomRecipe }) {
   return (
     <div>
-      <Header token={token} />
+      <Header
+        token={token}
+        currentUser={currentUser}
+        handleRandomRecipe={handleRandomRecipe}
+      />
       <div>
         <img src="" alt="log" />
         <h1> This is the title </h1>

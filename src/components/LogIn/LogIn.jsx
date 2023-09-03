@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 
-function LogIn({ handleLogIn }) {
+function LogIn({ handleLogIn, navigate }) {
   const {
     register,
     handleSubmit,
@@ -9,7 +9,11 @@ function LogIn({ handleLogIn }) {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(handleLogIn)}>
+      <form
+        onSubmit={handleSubmit((data) => {
+          handleLogIn(data, navigate);
+        })}
+      >
         <input
           {...register("username", { required: true })}
           placeholder="username..."
