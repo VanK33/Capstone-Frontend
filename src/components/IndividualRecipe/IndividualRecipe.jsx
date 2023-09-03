@@ -1,5 +1,18 @@
+import { useState } from "react";
+
 function IndividualRecipe({ recipe }) {
-  console.log("individualRecipe", recipe);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedRecipe, setSelectedRecipe] = useState();
+
+  const openModal = (recipe) => {
+    setSelectedRecipe(recipe);
+    setIsModalOpen(true);
+  };
+  const closeModal = (event) => {
+    if (event.target.getAttribute("class") === "modal-overlay") {
+      setIsModalOpen(false);
+    }
+  };
   return (
     <div>
       <div>
