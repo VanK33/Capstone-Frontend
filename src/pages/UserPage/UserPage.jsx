@@ -32,7 +32,11 @@ function UserPage({ token, currentUser }) {
         <div>
           <div> Welcome Back, {currentUser.contributor_name} </div>
           <UserProfile userDetails={userDetails} currentUser={currentUser} />
-          <UserRecipes userDetails={userDetails} />
+          <UserRecipes
+            userDetails={userDetails}
+            currentUser={currentUser}
+            fetchUserDetails={fetchUserDetails}
+          />
         </div>
       </div>
     )
