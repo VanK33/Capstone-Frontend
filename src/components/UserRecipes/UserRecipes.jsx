@@ -1,47 +1,28 @@
 import { Button } from "@mui/material";
-import { useState } from "react";
 import IndividualRecipe from "../IndividualRecipe/IndividualRecipe";
-import { DeleteModal, EditModal } from "../Modal/Modal";
-import axios from "axios";
+import { DeleteModal, EditModal, PostModal } from "../Modal/Modal";
 
-const URL = process.env.REACT_APP_BASE_URL;
-const PORT = process.env.REACT_APP_PORT;
-
-function UserRecipes({ userDetails, currentUser, fetchUserDetails }) {
+function UserRecipes({
+  userDetails,
+  isDeleteModalOpen,
+  isEditModalOpen,
+  isPostModalOpen,
+  openDeleteModal,
+  openEditModal,
+  openPostModal,
+  closeModal,
+  selectedRecipe,
+  deleteButtonCloseModal,
+  editButtonCloseModal,
+  PostButtonCloseModal,
+}) {
   // console.log("看看currentUser包含什么了", currentUser);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [selectedRecipe, setSelectedRecipe] = useState();
 
-  const openDeleteModal = (recipe) => {
-    setSelectedRecipe(recipe);
-    setIsDeleteModalOpen(true);
-  };
-  const openEditModal = (recipe) => {
-    setSelectedRecipe(recipe);
-    setIsEditModalOpen(true);
-  };
-  const closeModal = () => {
-    setIsDeleteModalOpen(false);
-    setIsEditModalOpen(false);
-  };
-
-  const deleteButtonCloseModal = async (recipeId) => {
-    try {
-      await axios.delete(`${URL}:${PORT}/${currentUser.id}/${recipeId}`);
-      // console.log("this suppose to be the deleting command");
-      await fetchUserDetails(currentUser.id);
-      setIsDeleteModalOpen(false);
-      setIsEditModalOpen(false);
-    } catch (error) {
-      console.log("this error comes from UserRecipes.jsx", error);
-    }
-  };
   return (
     <div>
       <div>
         <h2> Your Contribution </h2>
-        <Button> Post New </Button>
+        <Button onClick={openPostModal}> Post New </Button>
       </div>
 
       <div>
@@ -62,6 +43,7 @@ function UserRecipes({ userDetails, currentUser, fetchUserDetails }) {
               recipe={recipe}
               openDeleteModal={openDeleteModal}
               openEditModal={openEditModal}
+              openPostModal={openPostModal}
             />
           </li>
         ))}
@@ -78,7 +60,18 @@ function UserRecipes({ userDetails, currentUser, fetchUserDetails }) {
       )}
 
       {isEditModalOpen && (
-        <EditModal closeModal={closeModal} selectedRecipe={selectedRecipe} />
+        <EditModal
+          closeModal={closeModal}
+          selectedRecipe={selectedRecipe}
+          editButtonCloseModal={editButtonCloseModal}
+        />
+      )}
+
+      {isPostModalOpen && (
+        <PostModal
+          closeModal={closeModal}
+          PostButtonCloseModal={PostButtonCloseModal}
+        />
       )}
     </div>
   );

@@ -1,5 +1,5 @@
 function RecipeCardDetail({ selectedRecipe }) {
-  console.log(selectedRecipe.ingredients);
+  // console.log(selectedRecipe.ingredients);
   return (
     <div>
       <h1>{selectedRecipe.recipe_name} Details </h1>

@@ -1,41 +1,54 @@
 import Header from "../../components/Header/Header";
 import UserProfile from "../../components/UserProfile/UserProfile";
 import UserRecipes from "../../components/UserRecipes/UserRecipes";
-import axios from "axios";
-import { useState, useEffect } from "react";
 
-const URL = process.env.REACT_APP_BASE_URL;
-const PORT = process.env.REACT_APP_PORT;
-
-function UserPage({ token, currentUser }) {
-  console.log("currentUser", currentUser);
-  const [userDetails, setUserDetails] = useState();
-
-  const { id } = currentUser || {};
-  useEffect(() => {
-    fetchUserDetails(id);
-  }, [id]);
-
-  const fetchUserDetails = async (id) => {
-    try {
-      const response = await axios.get(`${URL}:${PORT}/user/${id}`);
-      setUserDetails(response.data);
-    } catch (error) {
-      console.log("error fetching user with: ", error);
-    }
-  };
+function UserPage({
+  token,
+  currentUser,
+  userDetails,
+  isDeleteModalOpen,
+  isEditModalOpen,
+  isPostModalOpen,
+  openDeleteModal,
+  openEditModal,
+  openPostModal,
+  closeModal,
+  selectedRecipe,
+  deleteButtonCloseModal,
+  editButtonCloseModal,
+  PostButtonCloseModal,
+}) {
+  // console.log("currentUser", currentUser);
 
   return (
     userDetails && (
       <div>
-        <Header token={token} currentUser={currentUser} />
+        <Header
+          token={token}
+          currentUser={currentUser}
+          userDetails={userDetails}
+          closeModal={closeModal}
+          openPostModal={openPostModal}
+          PostButtonCloseModal={PostButtonCloseModal}
+          isPostModalOpen={isPostModalOpen}
+          tryLuckButton={false}
+        />
         <div>
           <div> Welcome Back, {currentUser.contributor_name} </div>
           <UserProfile userDetails={userDetails} currentUser={currentUser} />
           <UserRecipes
             userDetails={userDetails}
-            currentUser={currentUser}
-            fetchUserDetails={fetchUserDetails}
+            isDeleteModalOpen={isDeleteModalOpen}
+            isEditModalOpen={isEditModalOpen}
+            isPostModalOpen={isPostModalOpen}
+            selectedRecipe={selectedRecipe}
+            openDeleteModal={openDeleteModal}
+            openEditModal={openEditModal}
+            openPostModal={openPostModal}
+            closeModal={closeModal}
+            deleteButtonCloseModal={deleteButtonCloseModal}
+            editButtonCloseModal={editButtonCloseModal}
+            PostButtonCloseModal={PostButtonCloseModal}
           />
         </div>
       </div>

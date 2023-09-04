@@ -1,5 +1,5 @@
 function RecipeCardVideo(props) {
-  console.log(props);
+  // console.log(props);
   const { youtube_link } = props.selectedRecipe;
 
   const extractVideoId = (url) => {

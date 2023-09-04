@@ -20,7 +20,7 @@ function capitalizeFirstLetter(string) {
 }
 
 function Modal(props) {
-  console.log(props);
+  // console.log(props);
   const settings = {
     dots: true,
     infinite: true,
@@ -29,11 +29,11 @@ function Modal(props) {
     slidesToScroll: 1,
   };
   return (
-    <div className="modal-overlay" onClick={props.closeModal}>
+    <div className="modal-overlay" onClick={props.closePublicModal}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <Slider {...settings}>
-          <RecipeCardDetail selectedRecipe={props.selectedRecipe} />
-          <RecipeCardVideo selectedRecipe={props.selectedRecipe} />
+          <RecipeCardDetail selectedRecipe={props.selectedPublicRecipe} />
+          <RecipeCardVideo selectedRecipe={props.selectedPublicRecipe} />
         </Slider>
       </div>
     </div>
@@ -70,8 +70,12 @@ export function DeleteModal({
   );
 }
 
-export function EditModal({ selectedRecipe, closeModal }) {
-  console.log(selectedRecipe);
+export function EditModal({
+  selectedRecipe,
+  closeModal,
+  editButtonCloseModal,
+}) {
+  // console.log(selectedRecipe);
 
   const [defaultValues, setDefaultValues] = useState({});
 
@@ -103,15 +107,11 @@ export function EditModal({ selectedRecipe, closeModal }) {
 
   const [steps, setSteps] = useState(selectedRecipe.steps || [""]);
 
-  const onSubmit = async (data) => {
-    // TODO:
-  };
-
   return (
     <div className="modal-overlay" onClick={closeModal}>
       <div className="editModal" onClick={(e) => e.stopPropagation()}>
         <h2>Edit {selectedRecipe.recipe_name}</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(editButtonCloseModal)}>
           <Controller
             name="ingredients"
             control={control}
@@ -183,4 +183,99 @@ export function EditModal({ selectedRecipe, closeModal }) {
   );
 }
 
+export function PostModal({ closeModal, PostButtonCloseModal }) {
+  const { register, handleSubmit, control } = useForm();
+
+  const [steps, setSteps] = useState([""]);
+
+  return (
+    <div className="modal-overlay" onClick={closeModal}>
+      <div className="editModal" onClick={(e) => e.stopPropagation()}>
+        <h2>Add Recipe</h2>
+        <form onSubmit={handleSubmit(PostButtonCloseModal)}>
+          <input
+            {...register("recipeName", { required: true })}
+            placeholder="Recipe Name"
+          />
+          <input
+            {...register("youtubeLink", { required: true })}
+            placeholder="YouTube Link"
+          />
+          <input
+            {...register("secondaryLink")}
+            placeholder="Secondary Link (optional)"
+          />
+          <Controller
+            name="ingredients"
+            control={control}
+            render={({ field }) => (
+              <Creatable
+                {...field}
+                options={ingredientOptions}
+                isMulti
+                placeholder="Ingredient"
+              />
+            )}
+          />
+          {steps.map((step, index) => (
+            <input
+              key={index}
+              {...register(`steps[${index}]`, { required: true })}
+              defaultValue={step}
+              placeholder={`Procedure ${index + 1}...`}
+              aria-invalid={false}
+            />
+          ))}
+          <Button variant="contained" onClick={() => setSteps([...steps, ""])}>
+            Add a step
+          </Button>
+          <Controller
+            name="meat"
+            control={control}
+            render={({ field }) => (
+              <Creatable
+                {...field}
+                options={meatOptions}
+                placeholder="Meat Types"
+                isClearable
+              />
+            )}
+          />
+          <Controller
+            name="origin"
+            control={control}
+            render={({ field }) => (
+              <Creatable
+                {...field}
+                options={originOptions}
+                placeholder="Origins"
+                isClearable
+              />
+            )}
+          />
+          <Controller
+            name="taste"
+            control={control}
+            render={({ field }) => (
+              <Creatable
+                {...field}
+                options={tasteOptions}
+                isMulti
+                placeholder="Tastes"
+              />
+            )}
+          />
+          <div>
+            <Button onClick={closeModal} variant="outlined">
+              Cancel
+            </Button>
+            <Button variant="contained" type="submit">
+              Save
+            </Button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
 export default Modal;

@@ -24,6 +24,7 @@ function LogIn({ handleLogIn, navigate }) {
         )}
         <input
           {...register("password", { required: true })}
+          type="password"
           placeholder="password..."
           aria-invalid={errors.password ? "true" : "false"}
         />

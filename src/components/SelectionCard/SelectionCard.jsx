@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+
 import { Button } from "@mui/material";
 import Modal from "../Modal/Modal";
 
-const URL = process.env.REACT_APP_BASE_URL;
-const PORT = process.env.REACT_APP_PORT;
 const apparenceCount = 1;
 
-function SelectionCard(props) {
-  const [recipeArray, setRecipeArray] = useState();
+function SelectionCard({
+  recipeArray,
+  closePublicModal,
+  openPublicModal,
+  selectedPublicRecipe,
+  isPublicModalOpen,
+}) {
+  // const [recipeArray, setRecipeArray] = useState();
   const [origins, setOrigins] = useState([]);
   const [tastes, setTastes] = useState([]);
   const [meatType, setMeatType] = useState([]);
@@ -18,31 +22,31 @@ function SelectionCard(props) {
   const [selectedTaste, setSelectedTaste] = useState(null);
   const [selectedMeatType, setSelectedMeatType] = useState(null);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedRecipe, setSelectedRecipe] = useState();
+  // const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [selectedRecipe, setSelectedRecipe] = useState();
 
-  const openModal = (recipe) => {
-    setSelectedRecipe(recipe);
-    setIsModalOpen(true);
-  };
-  const closeModal = (event) => {
-    if (event.target.getAttribute("class") === "modal-overlay") {
-      setIsModalOpen(false);
-    }
-  };
+  // const openModal = (recipe) => {
+  //   setSelectedRecipe(recipe);
+  //   setIsModalOpen(true);
+  // };
+  // const closeModal = (event) => {
+  //   if (event.target.getAttribute("class") === "modal-overlay") {
+  //     setIsModalOpen(false);
+  //   }
+  // };
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(`${URL}:${PORT}/public`);
-      setRecipeArray(response.data);
-    } catch (error) {
-      console.log("fetching data error: ", error);
-    }
-  };
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await axios.get(`${URL}:${PORT}/public`);
+  //     setRecipeArray(response.data);
+  //   } catch (error) {
+  //     console.log("fetching data error: ", error);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   useEffect(() => {
     if (recipeArray && recipeArray.length > 0) {
@@ -194,7 +198,7 @@ function SelectionCard(props) {
                 <Button
                   key={recipe.id}
                   onClick={() => {
-                    openModal(recipe);
+                    openPublicModal(recipe);
                   }}
                 >
                   {recipe.recipe_name}
@@ -204,8 +208,11 @@ function SelectionCard(props) {
         </>
       )}
 
-      {isModalOpen && (
-        <Modal closeModal={closeModal} selectedRecipe={selectedRecipe} />
+      {isPublicModalOpen && (
+        <Modal
+          closePublicModal={closePublicModal}
+          selectedPublicRecipe={selectedPublicRecipe}
+        />
       )}
     </div>
   );
