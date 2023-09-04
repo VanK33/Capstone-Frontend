@@ -1,0 +1,95 @@
+.header {
+  position: fixed;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  height: 700px; //tempo placeholder
+  width: 150px;
+  justify-content: space-between;
+  gap: 30px;
+  background-color: yellowgreen;
+  border-radius: 4px;
+  box-shadow: 3px 3px 5px 0px #888888;
+  background-color: #fffaea;
+  &__top-section {
+    display: flex;
+    flex-direction: column;
+    gap: 70px; //暂时保留45px,需要最后visually调整
+  }
+
+  &__logo-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__logo {
+    width: 125px;
+    height: 95px;
+    padding-top: 16px;
+  }
+
+  &__button-section {
+    //负责header所有button结构的
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 35px;
+  }
+
+  &__post-button {
+    width: 125px;
+    height: 40px; //暂时的
+  }
+
+  &__placeholder-button {
+    @extend .header__post-button;
+  }
+
+  &__try-button {
+    width: 125px;
+    height: 160px;
+  }
+
+  &__home-button {
+    height: 40px;
+    margin: 0 60px;
+  }
+
+  &__profile-button {
+    width: 125px;
+    height: 90px;
+  }
+
+  &__user-buttons {
+    // 负责login register俩button的结构的
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__login-button {
+    width: 125px;
+    height: 40px;
+  }
+
+  &__register-button {
+    @extend .header__login-button;
+  }
+
+  &__icon-section {
+    display: flex;
+    justify-content: space-around;
+  }
+  // 负责俩icon之间结构关系的
+
+  &__icon {
+    width: 30px;
+    height: 30px;
+    padding: 16px;
+    color: #5d4226;
+  }
+}
