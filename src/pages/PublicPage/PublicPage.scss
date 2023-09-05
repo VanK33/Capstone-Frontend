@@ -1,0 +1,28 @@
+.public-page {
+  display: flex;
+  margin: 20px 195px;
+  padding: 16px;
+  //   border: 1px solid black;
+  box-sizing: content-box;
+  border-radius: 10px;
+  box-shadow: 3px 3px 5px 0px #888888;
+  background-color: #fffaea;
+  max-width: 1018px;
+  min-height: 1300px;
+
+  &__heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 3px double #5d4226;
+  }
+
+  &__logo {
+    width: 1000px;
+  }
+
+  &__header {
+    padding: 0 0; //placeholder
+  }
+}

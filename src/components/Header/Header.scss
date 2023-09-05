@@ -13,10 +13,11 @@
   border-radius: 4px;
   box-shadow: 3px 3px 5px 0px #888888;
   background-color: #fffaea;
+
   &__top-section {
     display: flex;
     flex-direction: column;
-    gap: 70px; //暂时保留45px,需要最后visually调整
+    gap: 40px; //暂时保留45px,需要最后visually调整
   }
 
   &__logo-section {
@@ -46,6 +47,7 @@
 
   &__placeholder-button {
     @extend .header__post-button;
+    visibility: hidden;
   }
 
   &__try-button {

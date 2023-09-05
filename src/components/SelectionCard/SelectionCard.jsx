@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import "./SelectionCard.scss";
 import { Button } from "@mui/material";
 import Modal from "../Modal/Modal";
 
@@ -12,7 +12,6 @@ function SelectionCard({
   selectedPublicRecipe,
   isPublicModalOpen,
 }) {
-  // const [recipeArray, setRecipeArray] = useState();
   const [origins, setOrigins] = useState([]);
   const [tastes, setTastes] = useState([]);
   const [meatType, setMeatType] = useState([]);
@@ -22,31 +21,6 @@ function SelectionCard({
   const [selectedTaste, setSelectedTaste] = useState(null);
   const [selectedMeatType, setSelectedMeatType] = useState(null);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [selectedRecipe, setSelectedRecipe] = useState();
-
-  // const openModal = (recipe) => {
-  //   setSelectedRecipe(recipe);
-  //   setIsModalOpen(true);
-  // };
-  // const closeModal = (event) => {
-  //   if (event.target.getAttribute("class") === "modal-overlay") {
-  //     setIsModalOpen(false);
-  //   }
-  // };
-
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await axios.get(`${URL}:${PORT}/public`);
-  //     setRecipeArray(response.data);
-  //   } catch (error) {
-  //     console.log("fetching data error: ", error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
 
   useEffect(() => {
     if (recipeArray && recipeArray.length > 0) {
@@ -97,113 +71,134 @@ function SelectionCard({
   }, [recipeArray]);
 
   return (
-    <div>
+    <div className="selection-card">
       {isDataReady && (
         <>
-          <div>
-            <h3> Origin </h3>
-            {origins.map((origin) => (
-              <Button
-                key={origin.id}
-                onClick={() => {
-                  if (selectedOrigin === origin) {
-                    setSelectedOrigin(null);
-                  } else {
-                    setSelectedOrigin(origin);
-                  }
-                }}
-                variant={selectedOrigin === origin ? "contained" : "outlined"}
-              >
-                {origin}
-              </Button>
-            ))}
-          </div>
-          <div>
-            <h3> Taste </h3>
-            {tastes.map((taste) => (
-              <Button
-                key={taste.id}
-                onClick={() => {
-                  if (selectedTaste === taste) {
-                    setSelectedTaste(null);
-                  } else {
-                    setSelectedTaste(taste);
-                  }
-                }}
-                variant={selectedTaste === taste ? "contained" : "outlined"}
-              >
-                {taste}
-              </Button>
-            ))}
-          </div>
-          <div>
-            <h3> Meat-type </h3>
-            {meatType.map((meat) => (
-              <Button
-                key={meat.id}
-                onClick={() => {
-                  if (selectedMeatType === meat) {
-                    setSelectedMeatType(null);
-                  } else {
-                    setSelectedMeatType(meat);
-                  }
-                }}
-                variant={selectedMeatType === meat ? "contained" : "outlined"}
-              >
-                {meat}
-              </Button>
-            ))}
-          </div>
-          <div>
-            <h3> Ingredients </h3>
-            {ingredients.map((ingredient) => (
-              <Button
-                key={ingredient.id}
-                onClick={() => {
-                  if (selectedIngredients.includes(ingredient)) {
-                    setSelectedIngredients((prev) =>
-                      prev.filter((item) => item !== ingredient)
-                    );
-                  } else {
-                    setSelectedIngredients((prev) => [...prev, ingredient]);
-                  }
-                }}
-                variant={
-                  selectedIngredients.includes(ingredient)
-                    ? "contained"
-                    : "outlined"
-                }
-              >
-                {" "}
-                {ingredient}{" "}
-              </Button>
-            ))}
-          </div>
-          <div>
-            <h3> Results </h3>
-            {recipeArray
-              .filter(
-                (recipe) =>
-                  (!selectedOrigin ||
-                    recipe.origins.includes(selectedOrigin)) &&
-                  (!selectedTaste || recipe.tastes.includes(selectedTaste)) &&
-                  (!selectedMeatType ||
-                    recipe.meat.includes(selectedMeatType)) &&
-                  (selectedIngredients.length === 0 ||
-                    selectedIngredients.every((ingredient) =>
-                      recipe.ingredients.includes(ingredient)
-                    ))
-              )
-              .map((recipe) => (
+          {/* Orgin Section */}
+          <div className="selection-card__section">
+            <h3 className="selection-card__title"> Origin </h3>
+            <div className="selection-card__buttons">
+              {origins.map((origin) => (
                 <Button
-                  key={recipe.id}
+                  key={origin.id}
+                  className="selection-card__button"
                   onClick={() => {
-                    openPublicModal(recipe);
+                    if (selectedOrigin === origin) {
+                      setSelectedOrigin(null);
+                    } else {
+                      setSelectedOrigin(origin);
+                    }
                   }}
+                  variant={selectedOrigin === origin ? "contained" : "outlined"}
                 >
-                  {recipe.recipe_name}
+                  {origin}
                 </Button>
               ))}
+            </div>
+          </div>
+          {/* Taste Section */}
+          <div className="selection-card__section">
+            <h3 className="selection-card__title"> Taste </h3>
+            <div className="selection-card__buttons">
+              {tastes.map((taste) => (
+                <Button
+                  key={taste.id}
+                  className="selection-card__button"
+                  onClick={() => {
+                    if (selectedTaste === taste) {
+                      setSelectedTaste(null);
+                    } else {
+                      setSelectedTaste(taste);
+                    }
+                  }}
+                  variant={selectedTaste === taste ? "contained" : "outlined"}
+                >
+                  {taste}
+                </Button>
+              ))}
+            </div>
+          </div>
+          {/* Meat-type Section */}
+          <div className="selection-card__section">
+            <h3 className="selection-card__title"> Meat-type </h3>
+            <div className="selection-card__buttons">
+              {meatType.map((meat) => (
+                <Button
+                  key={meat.id}
+                  className="selection-card__button"
+                  onClick={() => {
+                    if (selectedMeatType === meat) {
+                      setSelectedMeatType(null);
+                    } else {
+                      setSelectedMeatType(meat);
+                    }
+                  }}
+                  variant={selectedMeatType === meat ? "contained" : "outlined"}
+                >
+                  {meat}
+                </Button>
+              ))}
+            </div>
+          </div>
+          {/* Ingredients Section */}
+          <div className="selection-card__section">
+            <h3 className="selection-card__title"> Ingredients </h3>
+            <div className="selection-card__buttons">
+              {ingredients.map((ingredient) => (
+                <Button
+                  key={ingredient.id}
+                  className="selection-card__button"
+                  onClick={() => {
+                    if (selectedIngredients.includes(ingredient)) {
+                      setSelectedIngredients((prev) =>
+                        prev.filter((item) => item !== ingredient)
+                      );
+                    } else {
+                      setSelectedIngredients((prev) => [...prev, ingredient]);
+                    }
+                  }}
+                  variant={
+                    selectedIngredients.includes(ingredient)
+                      ? "contained"
+                      : "outlined"
+                  }
+                >
+                  {" "}
+                  {ingredient}{" "}
+                </Button>
+              ))}
+            </div>
+          </div>
+          {/* Result Section */}
+          <div className="selection-card__section">
+            <h3 className="selection-card__result-title"> Results </h3>
+            <div className="selection-card__buttons">
+              {recipeArray
+                .filter(
+                  (recipe) =>
+                    (!selectedOrigin ||
+                      recipe.origins.includes(selectedOrigin)) &&
+                    (!selectedTaste || recipe.tastes.includes(selectedTaste)) &&
+                    (!selectedMeatType ||
+                      recipe.meat.includes(selectedMeatType)) &&
+                    (selectedIngredients.length === 0 ||
+                      selectedIngredients.every((ingredient) =>
+                        recipe.ingredients.includes(ingredient)
+                      ))
+                )
+                .map((recipe) => (
+                  <Button
+                    key={recipe.id}
+                    className="selection-card__button"
+                    variant="outlined"
+                    onClick={() => {
+                      openPublicModal(recipe);
+                    }}
+                  >
+                    {recipe.recipe_name}
+                  </Button>
+                ))}
+            </div>
           </div>
         </>
       )}

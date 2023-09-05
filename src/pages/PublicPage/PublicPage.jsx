@@ -1,5 +1,7 @@
 import Header from "../../components/Header/Header";
 import SelectionCard from "../../components/SelectionCard/SelectionCard";
+import "./PublicPage.scss";
+import websiteLogo2 from "../../assets/logo/websitelogo-2-nbg.png";
 
 function PublicPage({
   token,
@@ -16,7 +18,7 @@ function PublicPage({
   isPublicModalOpen,
 }) {
   return (
-    <div>
+    <div className="public-page">
       <Header
         token={token}
         currentUser={currentUser}
@@ -28,17 +30,22 @@ function PublicPage({
         isPostModalOpen={isPostModalOpen}
       />
       <div>
-        <img src="" alt="log" />
-        <h1> This is the title </h1>
-      </div>
+        <div className="public-page__heading">
+          <img src={websiteLogo2} alt="log" className="public-page__logo" />
+          <h1 className="public-page__header">
+            {" "}
+            Welcome! Please Make Your Desired Selections{" "}
+          </h1>
+        </div>
 
-      <SelectionCard
-        recipeArray={recipeArray}
-        closePublicModal={closePublicModal}
-        openPublicModal={openPublicModal}
-        selectedPublicRecipe={selectedPublicRecipe}
-        isPublicModalOpen={isPublicModalOpen}
-      />
+        <SelectionCard
+          recipeArray={recipeArray}
+          closePublicModal={closePublicModal}
+          openPublicModal={openPublicModal}
+          selectedPublicRecipe={selectedPublicRecipe}
+          isPublicModalOpen={isPublicModalOpen}
+        />
+      </div>
     </div>
   );
 }
