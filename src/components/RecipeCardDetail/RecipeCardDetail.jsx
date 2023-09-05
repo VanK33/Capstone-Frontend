@@ -1,13 +1,17 @@
+import "./RecipeCardDetail.scss";
+
 function RecipeCardDetail({ selectedRecipe }) {
   // console.log(selectedRecipe.ingredients);
   return (
-    <div>
-      <h1>{selectedRecipe.recipe_name} Details </h1>
+    <div className="card-detail">
+      <h1 className="card-detail__title">
+        {selectedRecipe.recipe_name} Details{" "}
+      </h1>
 
       <div>
         <div>
           <div>
-            <h3> Procedures </h3>
+            <h3 className="card-detail__sub-title"> Procedures </h3>
             <ul>
               {selectedRecipe.procedures.map((procedure) => (
                 <li>{procedure}</li>
