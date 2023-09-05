@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import websiteLogo from "../../assets/logo/just-websitelogo-ngb.png";
 
 function LogIn({ handleLogIn, navigate }) {
   const {
@@ -8,7 +9,10 @@ function LogIn({ handleLogIn, navigate }) {
   } = useForm();
 
   return (
-    <div>
+    <div className="login">
+      <div>
+        <img src={websiteLogo} alt="just logo" />
+      </div>
       <form
         onSubmit={handleSubmit((data) => {
           handleLogIn(data, navigate);

@@ -32,8 +32,14 @@ function Modal(props) {
     <div className="modal-overlay" onClick={props.closePublicModal}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <Slider {...settings}>
-          <RecipeCardDetail selectedRecipe={props.selectedPublicRecipe} />
-          <RecipeCardVideo selectedRecipe={props.selectedPublicRecipe} />
+          <RecipeCardDetail
+            selectedRecipe={props.selectedPublicRecipe}
+            closePublicModal={props.closePublicModal}
+          />
+          <RecipeCardVideo
+            selectedRecipe={props.selectedPublicRecipe}
+            closePublicModal={props.closePublicModal}
+          />
         </Slider>
       </div>
     </div>

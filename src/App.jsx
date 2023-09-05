@@ -169,10 +169,8 @@ function App() {
     setIsPublicModalOpen(true);
   };
 
-  const closePublicModal = (event) => {
-    if (event.target.getAttribute("class") === "modal-overlay") {
-      setIsPublicModalOpen(false);
-    }
+  const closePublicModal = () => {
+    setIsPublicModalOpen(false);
   };
   return (
     <BrowserRouter>

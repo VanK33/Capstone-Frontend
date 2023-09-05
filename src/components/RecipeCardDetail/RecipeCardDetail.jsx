@@ -1,6 +1,7 @@
 import "./RecipeCardDetail.scss";
+import { Button } from "@mui/material";
 
-function RecipeCardDetail({ selectedRecipe }) {
+function RecipeCardDetail({ selectedRecipe, closePublicModal }) {
   // console.log(selectedRecipe.ingredients);
   return (
     <div className="card-detail">
@@ -8,29 +9,35 @@ function RecipeCardDetail({ selectedRecipe }) {
         {selectedRecipe.recipe_name} Details{" "}
       </h1>
 
-      <div>
-        <div>
-          <div>
+      <div className="card-detail__body">
+        <div className="card-detail__detail-information">
+          <div className="card-detail__detail">
             <h3 className="card-detail__sub-title"> Procedures </h3>
-            <ul>
+            <ol>
               {selectedRecipe.procedures.map((procedure) => (
                 <li>{procedure}</li>
               ))}
-            </ul>
+            </ol>
           </div>
-          <div>
-            <div>
-              <h3> Ingredients </h3>
-              <ul>
-                {selectedRecipe.ingredients.map((ingredient) => (
-                  <li>{ingredient}</li>
-                ))}
-              </ul>
-            </div>
+          <div className="card-detail__detail card-detail__detail--boarder">
+            <h3> Ingredients </h3>
+            <ul className="card-detail__ingredients">
+              {selectedRecipe.ingredients.map((ingredient) => (
+                <li className="card-detail__ingredients-item">{ingredient}</li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        <a href={selectedRecipe.secondary_link}>Find Out More</a>
+        <div className="card-detail__buttons">
+          <Button variant="contained" onClick={selectedRecipe.secondary_link}>
+            Find Out More
+          </Button>
+
+          <Button variant="outlined" onClick={closePublicModal}>
+            Return to Homepage
+          </Button>
+        </div>
       </div>
     </div>
   );

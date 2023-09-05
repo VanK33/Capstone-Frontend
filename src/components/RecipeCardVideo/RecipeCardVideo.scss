@@ -1,0 +1,39 @@
+.card-video {
+  background-color: #eee8d6;
+  border: 3px double rgba(0, 0, 0, 0.5);
+  padding: 0 0 10px;
+  border-radius: 5px;
+  min-height: 600px;
+
+  &__title {
+    padding-left: 16px;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  &__frame-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 16px;
+  }
+
+  &__frame {
+    border: 3px solid black;
+    width: 750px;
+    aspect-ratio: 16/9;
+  }
+
+  &__button-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-right: 19px;
+  }
+}
