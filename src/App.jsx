@@ -229,6 +229,10 @@ function App() {
               deleteButtonCloseModal={deleteButtonCloseModal}
               editButtonCloseModal={editButtonCloseModal}
               PostButtonCloseModal={PostButtonCloseModal}
+              closePublicModal={closePublicModal}
+              openPublicModal={openPublicModal}
+              selectedPublicRecipe={selectedPublicRecipe}
+              isPublicModalOpen={isPublicModalOpen}
             />
           }
         />

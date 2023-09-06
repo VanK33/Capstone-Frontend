@@ -1,0 +1,44 @@
+.individual-recipe {
+  margin: 10px 5px;
+  padding: 16px;
+  background-color: rgb(238, 226, 208, 0.5);
+  border-radius: 15px;
+  display: flex;
+  gap: 110px;
+
+  &__image-placeholder {
+    width: 200px;
+    height: 100px;
+    background-color: #5d4226;
+    border-radius: 4px;
+
+    color: white;
+    text-align: center;
+  }
+
+  &__couple {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+
+    &--fix {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 50px;
+    }
+  }
+
+  &__item {
+    width: 200px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  &__sub-couple {
+    display: flex;
+    width: 200px;
+    gap: 20px;
+  }
+}

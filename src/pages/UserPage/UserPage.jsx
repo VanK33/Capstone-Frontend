@@ -1,6 +1,7 @@
 import Header from "../../components/Header/Header";
 import UserProfile from "../../components/UserProfile/UserProfile";
 import UserRecipes from "../../components/UserRecipes/UserRecipes";
+import "./UserPage.scss";
 
 function UserPage({
   token,
@@ -17,6 +18,10 @@ function UserPage({
   deleteButtonCloseModal,
   editButtonCloseModal,
   PostButtonCloseModal,
+  closePublicModal,
+  openPublicModal,
+  selectedPublicRecipe,
+  isPublicModalOpen,
 }) {
   // console.log("currentUser", currentUser);
 
@@ -33,8 +38,8 @@ function UserPage({
           isPostModalOpen={isPostModalOpen}
           tryLuckButton={false}
         />
-        <div>
-          <div> Welcome Back, {currentUser.contributor_name} </div>
+        <div className="user-page">
+          <h2> Welcome Back 🥂 {currentUser.contributor_name} </h2>
           <UserProfile userDetails={userDetails} currentUser={currentUser} />
           <UserRecipes
             userDetails={userDetails}
@@ -49,6 +54,10 @@ function UserPage({
             deleteButtonCloseModal={deleteButtonCloseModal}
             editButtonCloseModal={editButtonCloseModal}
             PostButtonCloseModal={PostButtonCloseModal}
+            closePublicModal={closePublicModal}
+            openPublicModal={openPublicModal}
+            selectedPublicRecipe={selectedPublicRecipe}
+            isPublicModalOpen={isPublicModalOpen}
           />
         </div>
       </div>

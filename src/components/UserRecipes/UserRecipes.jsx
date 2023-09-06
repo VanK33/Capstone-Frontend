@@ -1,6 +1,8 @@
 import { Button } from "@mui/material";
 import IndividualRecipe from "../IndividualRecipe/IndividualRecipe";
 import { DeleteModal, EditModal, PostModal } from "../Modal/Modal";
+import "./UserRecipes.scss";
+import Modal from "../Modal/Modal";
 
 function UserRecipes({
   userDetails,
@@ -15,28 +17,39 @@ function UserRecipes({
   deleteButtonCloseModal,
   editButtonCloseModal,
   PostButtonCloseModal,
+  closePublicModal,
+  openPublicModal,
+  selectedPublicRecipe,
+  isPublicModalOpen,
 }) {
   // console.log("看看currentUser包含什么了", currentUser);
 
   return (
-    <div>
-      <div>
-        <h2> Your Contribution </h2>
-        <Button onClick={openPostModal}> Post New </Button>
+    <div className="user-recipes">
+      <div className="user-recipes__first-section">
+        <h2 className="user-recipes__title"> Your Contribution </h2>
+        <Button
+          onClick={openPostModal}
+          variant="contained"
+          className="user-recipes__button"
+        >
+          {" "}
+          Post New{" "}
+        </Button>
       </div>
 
-      <div>
-        <div>
-          <div>Snap Shot</div>
-          <div> Name </div>
+      <div className="user-recipes__subheadings">
+        <div className="user-recipes__subheading-couple">
+          <div className="user-recipes__individual-subheading">Snap Shot</div>
+          <div className="user-recipes__individual-subheading"> Name </div>
         </div>
-        <div>
-          <div>Likes</div>
-          <div>Action</div>
+        <div className="user-recipes__subheading-couple">
+          <div className="user-recipes__individual-subheading">Likes</div>
+          <div className="user-recipes__individual-subheading">Action</div>
         </div>
       </div>
 
-      <ul>
+      <ul className="user-recipes__recipe-list">
         {userDetails.map((recipe) => (
           <li key={recipe.id}>
             <IndividualRecipe
@@ -44,6 +57,7 @@ function UserRecipes({
               openDeleteModal={openDeleteModal}
               openEditModal={openEditModal}
               openPostModal={openPostModal}
+              openPublicModal={openPublicModal}
             />
           </li>
         ))}
@@ -71,6 +85,13 @@ function UserRecipes({
         <PostModal
           closeModal={closeModal}
           PostButtonCloseModal={PostButtonCloseModal}
+        />
+      )}
+
+      {isPublicModalOpen && (
+        <Modal
+          closePublicModal={closePublicModal}
+          selectedPublicRecipe={selectedPublicRecipe}
         />
       )}
     </div>

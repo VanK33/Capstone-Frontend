@@ -1,0 +1,39 @@
+.user-profile {
+  margin: 0 auto;
+  padding: 16px;
+  margin-top: 16px;
+  box-sizing: content-box;
+  border-radius: 10px;
+  box-shadow: 3px 3px 5px 0px #888888;
+  background-color: #fffaea;
+  width: 600px;
+  height: 170px;
+
+  display: flex;
+  gap: 70px;
+  align-items: flex-start;
+
+  &__picture {
+    margin-left: 16px;
+    width: 120px;
+    aspect-ratio: 0.7;
+    border-radius: 30px;
+  }
+
+  &__section {
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 140px;
+  }
+
+  &__subsection {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  &__subtitle {
+    font-weight: bold;
+  }
+}
