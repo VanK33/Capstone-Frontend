@@ -56,20 +56,24 @@ export function DeleteModal({
   return (
     <div className="modal-overlay" onClick={closeModal}>
       <div className="deleteModal" onClick={(e) => e.stopPropagation()}>
-        <h2> {messageTitle} </h2>
+        <div className="deleteModal__card-info">
+          <div className="deleteModal__message-body">
+            <h2> {messageTitle} </h2>
 
-        <p> {messageBody} </p>
+            <p> {messageBody} </p>
+          </div>
 
-        <div>
-          <Button onClick={closeModal} variant="outlined">
-            Cancel
-          </Button>
-          <Button
-            variant="contained"
-            onClick={() => deleteButtonCloseModal(selectedRecipe)}
-          >
-            Confirm
-          </Button>
+          <div className="deleteModal__buttons">
+            <Button onClick={closeModal} variant="outlined">
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              onClick={() => deleteButtonCloseModal(selectedRecipe)}
+            >
+              Confirm
+            </Button>
+          </div>
         </div>
       </div>
     </div>
@@ -196,90 +200,143 @@ export function PostModal({ closeModal, PostButtonCloseModal }) {
 
   return (
     <div className="modal-overlay" onClick={closeModal}>
-      <div className="editModal" onClick={(e) => e.stopPropagation()}>
-        <h2>Add Recipe</h2>
-        <form onSubmit={handleSubmit(PostButtonCloseModal)}>
-          <input
-            {...register("recipeName", { required: true })}
-            placeholder="Recipe Name"
-          />
-          <input
-            {...register("youtubeLink", { required: true })}
-            placeholder="YouTube Link"
-          />
-          <input
-            {...register("secondaryLink")}
-            placeholder="Secondary Link (optional)"
-          />
-          <Controller
-            name="ingredients"
-            control={control}
-            render={({ field }) => (
-              <Creatable
-                {...field}
-                options={ingredientOptions}
-                isMulti
-                placeholder="Ingredient"
+      <div className="postModal" onClick={(e) => e.stopPropagation()}>
+        <div className="postModal__card-info">
+          <h2>Add Recipe</h2>
+          <form
+            onSubmit={handleSubmit(PostButtonCloseModal)}
+            className="postModal__form"
+          >
+            <div className="postModal__inputs">
+              <label htmlFor="recipeName">Recipe Name</label>
+              <input
+                {...register("recipeName", { required: true })}
+                placeholder="Recipe Name"
+                id="recipeName"
+                className="postModal__input"
               />
-            )}
-          />
-          {steps.map((step, index) => (
-            <input
-              key={index}
-              {...register(`steps[${index}]`, { required: true })}
-              defaultValue={step}
-              placeholder={`Procedure ${index + 1}...`}
-              aria-invalid={false}
-            />
-          ))}
-          <Button variant="contained" onClick={() => setSteps([...steps, ""])}>
-            Add a step
-          </Button>
-          <Controller
-            name="meat"
-            control={control}
-            render={({ field }) => (
-              <Creatable
-                {...field}
-                options={meatOptions}
-                placeholder="Meat Types"
-                isClearable
+            </div>
+            <div className="postModal__inputs">
+              <label htmlFor="youtubeLink">YouTube Link</label>
+              <input
+                {...register("youtubeLink", { required: true })}
+                placeholder="YouTube Link"
+                id="youtubeLink"
+                className="postModal__input"
               />
-            )}
-          />
-          <Controller
-            name="origin"
-            control={control}
-            render={({ field }) => (
-              <Creatable
-                {...field}
-                options={originOptions}
-                placeholder="Origins"
-                isClearable
+            </div>
+            <div className="postModal__inputs">
+              <label htmlFor="secondaryLink">Secondary Link (optional)</label>
+              <input
+                {...register("secondaryLink")}
+                placeholder="Secondary Link (optional)"
+                id="secondaryLink"
+                className="postModal__input"
               />
-            )}
-          />
-          <Controller
-            name="taste"
-            control={control}
-            render={({ field }) => (
-              <Creatable
-                {...field}
-                options={tasteOptions}
-                isMulti
-                placeholder="Tastes"
+            </div>
+            <div className="postModal__inputs">
+              <label>Ingredients</label>
+              <Controller
+                name="ingredients"
+                control={control}
+                className="postModal__input"
+                render={({ field }) => (
+                  <Creatable
+                    {...field}
+                    options={ingredientOptions}
+                    isMulti
+                    placeholder="Ingredient"
+                  />
+                )}
               />
-            )}
-          />
-          <div>
-            <Button onClick={closeModal} variant="outlined">
-              Cancel
-            </Button>
-            <Button variant="contained" type="submit">
-              Save
-            </Button>
-          </div>
-        </form>
+            </div>
+            {steps.map((step, index) => (
+              <div key={index} className="postModal__inputs">
+                <label htmlFor={`steps[${index}]`}>Procedure {index + 1}</label>
+                <input
+                  {...register(`steps[${index}]`, { required: true })}
+                  defaultValue={step}
+                  placeholder={`Procedure ${index + 1}...`}
+                  aria-invalid={false}
+                  id={`steps[${index}]`}
+                  className="postModal__input"
+                />
+              </div>
+            ))}
+            <div className="postModal__inputs">
+              <Button
+                variant="contained"
+                onClick={() => setSteps([...steps, ""])}
+              >
+                Add a step
+              </Button>
+            </div>
+            <div className="postModal__inputs">
+              <label>Meat Types</label>
+              <Controller
+                name="meat"
+                control={control}
+                className="postModal__input"
+                render={({ field }) => (
+                  <Creatable
+                    {...field}
+                    options={meatOptions}
+                    placeholder="Meat Types"
+                    isClearable
+                  />
+                )}
+              />
+            </div>
+            <div className="postModal__inputs">
+              <label>Origins</label>
+              <Controller
+                name="origin"
+                control={control}
+                className="postModal__input"
+                render={({ field }) => (
+                  <Creatable
+                    {...field}
+                    options={originOptions}
+                    placeholder="Origins"
+                    isClearable
+                  />
+                )}
+              />
+            </div>
+            <div className="postModal__inputs">
+              <label>Tastes</label>
+              <Controller
+                name="taste"
+                control={control}
+                className="postModal__input"
+                render={({ field }) => (
+                  <Creatable
+                    {...field}
+                    options={tasteOptions}
+                    isMulti
+                    placeholder="Tastes"
+                  />
+                )}
+              />
+            </div>
+            <div className="postModal__buttons">
+              <Button
+                onClick={closeModal}
+                variant="outlined"
+                className="postModal__button"
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="contained"
+                type="submit"
+                className="postModal__button"
+              >
+                Submit
+              </Button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

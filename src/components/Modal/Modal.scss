@@ -36,8 +36,82 @@
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
   z-index: 1001;
   padding: 24px;
+
+  &__card-info {
+    background-color: #eee8d6;
+    border: 3px double rgba(0, 0, 0, 0.5);
+    padding: 0 10px 10px 10px;
+    border-radius: 5px;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__message-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 30px;
+  }
 }
 
 .editModal {
   @extend .deleteModal;
+}
+
+.postModal {
+  position: relative;
+  top: -70px;
+  left: 0;
+  width: 672px;
+  display: block;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  padding: 24px;
+
+  &__card-info {
+    background-color: #eee8d6;
+    border: 3px double rgba(0, 0, 0, 0.5);
+    padding: 0 10px 10px 10px;
+    border-radius: 5px;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__input {
+    padding: 0.6rem 1rem 0.6rem 0.6rem;
+    border-radius: 4px;
+    border: 1.5px solid #c3c2be;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 30px;
+  }
+
+  &__button {
+    width: 87px;
+  }
 }

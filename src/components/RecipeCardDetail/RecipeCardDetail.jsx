@@ -30,9 +30,9 @@ function RecipeCardDetail({ selectedRecipe, closePublicModal }) {
         </div>
 
         <div className="card-detail__buttons">
-          <Button variant="contained" onClick={selectedRecipe.secondary_link}>
-            Find Out More
-          </Button>
+          <a href={selectedRecipe.secondary_link}>
+            <Button variant="contained">Find Out More</Button>
+          </a>
 
           <Button variant="outlined" onClick={closePublicModal}>
             Return to Homepage
