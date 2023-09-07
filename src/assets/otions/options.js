@@ -95,3 +95,23 @@ export const tasteOptions = [
   { value: "bitter", label: "Bitter" },
   { value: "umami", label: "Umami" },
 ];
+
+export const recipes = {
+  "Turkey Chili": "/images/turkey-chili.jpg",
+  "Shrimp Scampi": "/images/shrimp-scampi.jpg",
+  "Shrimp Fra Diavolo": "/images/shrimp-fra-diavolo.jpg",
+  "Shrimp Ceviche": "/images/shrimp-ceviche.jpg",
+  "Roasted Tomato Basil Soup": "/images/roasted-tomato-basil-soup.jpg",
+  "Lemon Garlic Chicken": "/images/lemon-garlic-chicken.jpg",
+  "Lemon Chicken Piccata": "/images/lemon-chicken-piccata.jpg",
+  Hummus: "/images/hummus.jpg",
+  "Grilled Zucchini Salad": "/images/grilled-zucchini-salad.jpg",
+  "Greek Pasta Salad": "/images/greek-pasta-salad.jpg",
+  "Greek Chicken Gyros": "/images/greek-chicken-gyros.jpg",
+  "Garlic Shrimp Pasta": "/images/garlic-shrimp-pasta.jpg",
+  "Crispy Fried Calamari": "/images/crispy-fried-calamari.jpg",
+  "Creamy Chicken Pasta": "/images/creamy-chicken-pasta.jpg",
+  "Corn Chowder": "/images/corn-chowder.jpg",
+  "Chicken Stew": "/images/chicken-stew.jpg",
+  "Chicken Salad": "/images/chicken-salad.jpg",
+};

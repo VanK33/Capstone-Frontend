@@ -1,21 +1,32 @@
 import "./IndividualRecipe.scss";
 import deleteIcon from "../../assets/logo/delete-icon.svg";
 import editIcon from "../../assets/logo/edit-icon.svg";
+import { recipes } from "../../assets/otions/options";
 function IndividualRecipe({
   recipe,
   openDeleteModal,
   openEditModal,
   openPublicModal,
 }) {
+  const imageUrl = recipes[recipe.recipe_name];
   return (
     <div className="individual-recipe">
       <div
         className="individual-recipe__couple"
         onClick={() => openPublicModal(recipe)}
       >
-        {/* <img src="" alt="recipe snapshot" /> */}
-        <div class="individual-recipe__image-placeholder">
-          IMAGE PLACEHOLDER
+        <div className="image">
+          {imageUrl ? (
+            <img
+              src={imageUrl}
+              alt="recipe snapshot"
+              className="individual-recipe__image"
+            />
+          ) : (
+            <div className="individual-recipe__image-placeholder">
+              IMAGE PLACEHOLDER
+            </div>
+          )}
         </div>
         <div className="individual-recipe__item"> {recipe.recipe_name} </div>
       </div>
