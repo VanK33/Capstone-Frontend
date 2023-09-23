@@ -1,0 +1,32 @@
+.recipe-detail {
+  background-color: #eee8d6;
+  border: 3px double rgba(0, 0, 0, 0.5);
+  padding: 0 0 10px;
+  border-radius: 5px;
+  min-height: 600px;
+
+  &__image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    height: 545px;
+  }
+
+  &__rotate-image {
+    border: 3px solid black;
+    width: 500px;
+    transform: rotate(90deg);
+  }
+
+  &__image {
+    border: 3px solid black;
+    width: 750px;
+  }
+
+  &__title {
+    padding-left: 16px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+  }
+}

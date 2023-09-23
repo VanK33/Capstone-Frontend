@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import RecipeCardDetail from "../RecipeCardDetail/RecipeCardDetail";
 import RecipeCardVideo from "../RecipeCardVideo/RecipeCardVideo";
+import RecipeImageDetail from "../RecipeImageDetail/RecipeImageDetail";
 import { Button } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 import Creatable from "react-select/creatable";
@@ -13,6 +14,7 @@ import {
   meatOptions,
   ingredientOptions,
   originOptions,
+  recipes,
 } from "../../assets/otions/options";
 
 function capitalizeFirstLetter(string) {
@@ -20,7 +22,7 @@ function capitalizeFirstLetter(string) {
 }
 
 function Modal(props) {
-  // console.log(props);
+  console.log(props);
   const settings = {
     dots: true,
     infinite: true,
@@ -28,10 +30,17 @@ function Modal(props) {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+
+  const matchedImage = recipes[props.selectedPublicRecipe.recipe_name];
+
   return (
     <div className="modal-overlay" onClick={props.closePublicModal}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <Slider {...settings}>
+          <RecipeImageDetail
+            selectedRecipe={props.selectedPublicRecipe}
+            closePublicModal={props.closePublicModal}
+          />
           <RecipeCardDetail
             selectedRecipe={props.selectedPublicRecipe}
             closePublicModal={props.closePublicModal}
