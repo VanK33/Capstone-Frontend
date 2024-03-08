@@ -2,8 +2,11 @@
 Welcome to the PickYourDishes project! This repository is responsible for the visual presentation of its backend counterpart, [Pick Your Dishes - API](https://github.com/VanK33/PickYourDish-API), where all the heavy lifting takes place. This application is served as a food recipe management applicaiton designed to streamline the process of discovering, organizing and sharing culinary creations. 
 
 ## Table of Content
-- Reserve
-
+- [About](#about)
+- [Key Features](#key-features)
+- [How To](#how-to)
+- [Roadmap](#roadmap)
+- [Pain Points](#current-painpoints)
 
 ## About
 This project serves as the forntend interactive application with a design of helping culinary enhusiasts discover, organize and share their favorite recipes with ease. The frontend UI allow the user to navigate through a vast collection of recipes depending on the personal choices, and manage their personal recipe collections once they are logged into the system. 
@@ -49,3 +52,8 @@ Currently, the user registration window is not implemented, although the backend
 It is another critical component as each recipe requires a thumbnail image to be properly displayed. The uploaded image should ideally be in a 16:9 aspect ratio, so additional libraries, such as compress.js, are needed to achieve this requirement.
 
 
+### Current Painpoints:
+- How to handle recipe image upload? Frontend-handle or Backend-handle? 
+  - Three instances of the image are used - one in Modal, one in the Saved Recipe, one in the contribution section. The latter two has the same dimension but not the first. How to handle image coming in with different size to compensate this dynamic adjustment need?
+- Same goes for profile picture - where to handle?
+- LEGAL ISSUE: what if uploader and recipe creator are not the same person?
