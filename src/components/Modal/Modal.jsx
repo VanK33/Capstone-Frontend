@@ -299,7 +299,7 @@ export function PostModal({ closeModal, PostButtonCloseModal }) {
             <div className="postModal__inputs">
               <label>Origins</label>
               <Controller
-                name="origin"
+                name="origins"
                 control={control}
                 className="postModal__input"
                 render={({ field }) => (
@@ -307,6 +307,7 @@ export function PostModal({ closeModal, PostButtonCloseModal }) {
                     {...field}
                     options={originOptions}
                     placeholder="Origins"
+                    isMulti
                     isClearable
                   />
                 )}
@@ -315,7 +316,7 @@ export function PostModal({ closeModal, PostButtonCloseModal }) {
             <div className="postModal__inputs">
               <label>Tastes</label>
               <Controller
-                name="taste"
+                name="tastes"
                 control={control}
                 className="postModal__input"
                 render={({ field }) => (

@@ -124,19 +124,44 @@ function App() {
 
   const PostButtonCloseModal = async (data) => {
     try {
-      let link = `${URL}:${PORT}/user/${currentUser.id}`;
+      // let link = `${URL}:${PORT}/user/${currentUser.id}`;
       // console.log("this is the link", link);
 
-      const dataWithContributor = {
-        ...data,
+      // modified data to fit the backend - removing label option from the data
+      const {
+        meat,
+        origins,
+        tastes,
+        ingredients,
+        steps: procedures,
+        recipeName: recipe_name,
+        youtubeLink: youtube_link,
+        secondaryLink: secondary_link,
+      } = data;
+      const modifiedTastes = tastes?.map((taste) => taste.value);
+      const modifiedOrigin = origins?.map((origin) => origin.value);
+      const modifiedIngredients = ingredients?.map(
+        (ingredient) => ingredient.value
+      );
+      // modified data to fit the backend, including the contributor
+      const modifiedData = {
+        recipe_name,
+        youtube_link,
+        secondary_link,
+        meat: meat.value,
+        procedures,
+        origins: modifiedOrigin,
+        tastes: modifiedTastes,
+        ingredients: modifiedIngredients,
         contributor: currentUser.contributor_name,
       };
 
-      // await axios.post(
-      //   `${URL}:${PORT}/user/${currentUser.id}`,
-      //   dataWithContributor
-      // );
-      console.log("this suppose to be the Post command", dataWithContributor);
+      // console.log("this suppose to be the Post command", modifiedData);
+      const response = await axios.post(
+        `${URL}:${PORT}/user/${currentUser.id}`,
+        modifiedData
+      );
+      console.log("this is the response from post", response);
       await fetchUserDetails(currentUser.id);
       // setIsPostModalOpen(false);
     } catch (error) {
