@@ -27,6 +27,8 @@ function App() {
     fetchUserDetails(id);
   }, [id]);
 
+  const handleFile = () => {};
+
   const handleLogIn = async (data, navigate) => {
     try {
       let response = await axios.post(`${URL}:${PORT}/auth/login`, {
@@ -124,9 +126,6 @@ function App() {
 
   const PostButtonCloseModal = async (data) => {
     try {
-      // let link = `${URL}:${PORT}/user/${currentUser.id}`;
-      // console.log("this is the link", link);
-
       // modified data to fit the backend - removing label option from the data
       const {
         meat,

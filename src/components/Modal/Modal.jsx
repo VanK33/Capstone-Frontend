@@ -14,7 +14,6 @@ import {
   meatOptions,
   ingredientOptions,
   originOptions,
-  recipes,
 } from "../../assets/otions/options";
 
 function capitalizeFirstLetter(string) {
@@ -30,8 +29,6 @@ function Modal(props) {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-
-  const matchedImage = recipes[props.selectedPublicRecipe.recipe_name];
 
   return (
     <div className="modal-overlay" onClick={props.closePublicModal}>
@@ -215,6 +212,7 @@ export function PostModal({ closeModal, PostButtonCloseModal }) {
           <form
             onSubmit={handleSubmit(PostButtonCloseModal)}
             className="postModal__form"
+            enctype="multipart/form-data"
           >
             <div className="postModal__inputs">
               <label htmlFor="recipeName">Recipe Name</label>
@@ -330,20 +328,27 @@ export function PostModal({ closeModal, PostButtonCloseModal }) {
               />
             </div>
             <div className="postModal__buttons">
-              <Button
-                onClick={closeModal}
-                variant="outlined"
-                className="postModal__button"
-              >
-                Cancel
-              </Button>
-              <Button
-                variant="contained"
-                type="submit"
-                className="postModal__button"
-              >
-                Submit
-              </Button>
+              <input
+                type="file"
+                name="thumbnail"
+                className="postModal__thumbnail-upload"
+              />
+              <div className="postModal__confirm-buttons">
+                <Button
+                  onClick={closeModal}
+                  variant="outlined"
+                  className="postModal__button"
+                >
+                  Cancel
+                </Button>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  className="postModal__button"
+                >
+                  Submit
+                </Button>
+              </div>
             </div>
           </form>
         </div>

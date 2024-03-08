@@ -124,6 +124,11 @@
 
   &__buttons {
     display: flex;
+    justify-content: space-between;
+  }
+
+  &__confirm-buttons {
+    display: flex;
     justify-content: flex-end;
     gap: 30px;
   }
