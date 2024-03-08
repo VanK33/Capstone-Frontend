@@ -124,8 +124,8 @@ function App() {
 
   const PostButtonCloseModal = async (data) => {
     try {
-      // await axios.post(`${URL}:${PORT}/${currentUser.id}`, data);
-      console.log("this suppose to be the Post command", data);
+      await axios.post(`${URL}:${PORT}/${currentUser.id}`, data);
+      // console.log("this suppose to be the Post command", data);
       await fetchUserDetails(currentUser.id);
       setIsPostModalOpen(false);
     } catch (error) {

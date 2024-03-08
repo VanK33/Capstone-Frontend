@@ -22,7 +22,7 @@ function capitalizeFirstLetter(string) {
 }
 
 function Modal(props) {
-  console.log(props);
+  // console.log("Elements currently displayed in the modal", props);
   const settings = {
     dots: true,
     infinite: true,

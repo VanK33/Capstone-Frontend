@@ -2,7 +2,10 @@ import "./RecipeCardDetail.scss";
 import { Button } from "@mui/material";
 
 function RecipeCardDetail({ selectedRecipe, closePublicModal }) {
-  // console.log(selectedRecipe.ingredients);
+  // console.log(
+  //   "This is the log for selectedRecipe.ingredients",
+  //   selectedRecipe.ingredients
+  // );
   return (
     <div className="card-detail">
       <h1 className="card-detail__title">
@@ -22,8 +25,10 @@ function RecipeCardDetail({ selectedRecipe, closePublicModal }) {
           <div className="card-detail__detail card-detail__detail--boarder">
             <h3> Ingredients </h3>
             <ul className="card-detail__ingredients">
-              {selectedRecipe.ingredients.map((ingredient) => (
-                <li className="card-detail__ingredients-item">{ingredient}</li>
+              {selectedRecipe.ingredients.map((ingredient, index) => (
+                <li key={index} className="card-detail__ingredients-item">
+                  {ingredient}
+                </li>
               ))}
             </ul>
           </div>
