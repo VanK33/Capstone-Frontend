@@ -124,10 +124,21 @@ function App() {
 
   const PostButtonCloseModal = async (data) => {
     try {
-      await axios.post(`${URL}:${PORT}/${currentUser.id}`, data);
-      // console.log("this suppose to be the Post command", data);
+      let link = `${URL}:${PORT}/user/${currentUser.id}`;
+      // console.log("this is the link", link);
+
+      const dataWithContributor = {
+        ...data,
+        contributor: currentUser.contributor_name,
+      };
+
+      // await axios.post(
+      //   `${URL}:${PORT}/user/${currentUser.id}`,
+      //   dataWithContributor
+      // );
+      console.log("this suppose to be the Post command", dataWithContributor);
       await fetchUserDetails(currentUser.id);
-      setIsPostModalOpen(false);
+      // setIsPostModalOpen(false);
     } catch (error) {
       console.log(
         "this error comes from PostButtonCloseModal of UserRecipes.jsx",
