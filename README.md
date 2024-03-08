@@ -49,3 +49,8 @@ Currently, the user registration window is not implemented, although the backend
 It is another critical component as each recipe requires a thumbnail image to be properly displayed. The uploaded image should ideally be in a 16:9 aspect ratio, so additional libraries, such as compress.js, are needed to achieve this requirement.
 
 
+### Current Painpoints:
+- How to handle recipe image upload? Frontend-handle or Backend-handle? 
+  - Three instances of the image are used - one in Modal, one in the Saved Recipe, one in the contribution section. The latter two has the same dimension but not the first. How to handle image coming in with different size to compensate this dynamic adjustment need?
+- Same goes for profile picture - where to handle?
+- LEGAL ISSUE: what if uploader and recipe creator are not the same person?
